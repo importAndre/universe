@@ -21,7 +21,7 @@ class Star:
         """
             return: density in kg/m³
         """
-        volume = (4 / 3) * 3.1415 * (self.radius ** 3)
+        volume = (4 / 3) * Math.pi * (self.radius ** 3)
         return self.mass / volume
     
     def surface_gravitational_field(self):
