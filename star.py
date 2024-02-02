@@ -1,8 +1,10 @@
 import math
+from elements_infos import elements_mass
 
 class Star:
 
     gravitational_constant = 6.673 * (10 ** (- 11)) # Gravitational constant in m^3 kg^-1 s^-2
+    sun_mass = 1.989 * (10 ** 30)
 
     def __init__(self, mass, radius, lambda_max, chemical_composition):
         """
@@ -68,6 +70,20 @@ class Star:
         else:
             return "This object doesn't have enough temperature to be a star"
 
+    def proton_proton_chain(self):
+        hydrogen_mass_amount = chemical_composition['hydrogen'] * self.mass
+        hydrogen_atom_mass = elements_mass['hydrogen']
+        hydrogen_count = hydrogen_mass_amount / hydrogen_atom_mass
+
+        reactions_count = hydrogen_count / 4
+
+        mass_defect = 4 * hydrogen_atom_mass - elements_mass['helium']
+        energy_per_reaction = mass_defect * (3 * 10 ** 8) # E=mc^2
+
+        total_energy = reactions_count * energy_per_reaction
+
+        return total_energy
+
 
 sun_mass = 1.989 * (10 ** 30)
 sun_radius = 696_340_000
@@ -77,4 +93,5 @@ chemical_composition = {
     'helium': 0.079
 }
 sun = Star(sun_mass, sun_radius, sun_lambda_max, chemical_composition)
-print(sun.spectral_classification())
+
+sun.proton_proton_chain()
